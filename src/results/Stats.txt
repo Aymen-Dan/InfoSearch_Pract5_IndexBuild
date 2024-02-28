@@ -1,0 +1,7 @@
+Time taken to complete BSBI: 416467000 ns,
+or 416.467 ms,
+or 0.416467 s.
+
+Number of files indexed: 1
+
+Total file size indexed: 421.4765625 KB
