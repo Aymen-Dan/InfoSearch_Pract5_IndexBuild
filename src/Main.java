@@ -1,21 +1,58 @@
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
-        /**TODO: add user-friendly interface, like choosing how many blocks and having an ability to open up files*/
-        // Example usage
-        String directoryPath = "C:\\Users\\armad\\OneDrive\\Desktop\\IntelliJ IDEA Community Edition 2021.1.1\\IdeaProjects\\InfoSearch_Pract5_IndexBuild\\src\\res";
-        int blockSize = 100;  // Adjust this based on your system's memory constraints
+        int blockSize = 100;
+        Scanner in = new Scanner(System.in);
 
-        Map<String, List<String>> index = BSBI_Index.buildBSBIIndex(directoryPath, blockSize);
+        /*System.out.println("Please input number of blocks:");
+        blockSize = in.nextInt();*/
 
-       /**TODO: remove automatic console printOut*/
-        // Print the final index
-        for (Map.Entry<String, List<String>> entry : index.entrySet()) {
-            System.out.println(entry.getKey() + ": " + entry.getValue());
-        }
+        String directoryPath = "src/res";
+        BSBI_Index index = new BSBI_Index(directoryPath, blockSize);
+
+
+        System.out.println("""
+                0 - Print index in console;
+                1 - Open Index.txt;
+                2 - Print statistics;
+                3 - Open Stats.txt
+                -1 - Exit
+                """);
+
+        System.out.println("\nYour input here: ");
+        int i = in.nextInt();
+
+      while(i != -1) {
+
+          switch(i) {
+              case 0:
+                  index.printIndex();
+                  break;
+              case 1:
+                  index.openTXT("src/results/Index.txt");
+                  break;
+              case 2:
+                  index.printStatistics();
+                  break;
+              case 3:
+                  index.openTXT("src/results/Stats.txt");
+                  break;
+              default:
+                  System.out.println("Incorrect format! Try again.");
+          }
+          System.out.println("\n0 - Print index in console;\n" +
+                  "1 - Open Index.txt;\n" +
+                  "2 - Print statistics;\n" +
+                  "3 - Open Stats.txt\n" +
+                  "-1 - Exit");
+          System.out.println("\nYour input here: ");
+          i = in.nextInt();
+      }
     }
-
 }
+
